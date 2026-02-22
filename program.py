@@ -3,10 +3,10 @@ import time
 import pyperclip
 from google import genai
 
-# --- Set your API key ---
-client = genai.Client(api_key="AIzaSyCeZX7k5iT7Kfzj8ETvHcuY2AukvOmhnVc")
 
-# Click WhatsApp window
+client = genai.Client(api_key="")
+
+
 pyautogui.click(1208, 1054)
 time.sleep(1)
 
