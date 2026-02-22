@@ -4,7 +4,7 @@ import pyperclip
 from google import genai
 
 # --- Set your API key ---
-client = genai.Client(api_key="AIzaSyA29-NhhkIy0RkFcAtHCjHUzW9cphhQXSA")
+client = genai.Client(api_key="AIzaSyCeZX7k5iT7Kfzj8ETvHcuY2AukvOmhnVc")
 
 # Click WhatsApp window
 pyautogui.click(1208, 1054)
@@ -17,34 +17,30 @@ while True:
     run_count += 1
     print(f"\n--- Scan {run_count} started ---")
 
-    # STEP 1: Drag to select text from WhatsApp
+    
     pyautogui.moveTo(538, 144)
     pyautogui.mouseDown(button='left')
     pyautogui.dragTo(1831, 932, duration=2.0, button='left')
     pyautogui.mouseUp(button='left')
 
-    # STEP 2: Copy selected text
     pyautogui.hotkey('ctrl', 'c')
     pyautogui.click()
     time.sleep(1)
 
-    # STEP 3: Read clipboard
     chat_history = pyperclip.paste().strip()
     print("WhatsApp Text:\n", chat_history)
 
-    # Skip if clipboard empty
+   
     if not chat_history:
         print("No new message detected.")
         time.sleep(2)
         continue
 
-    # STEP 4: Add user message to chat context
     chat_context.append({"author": "user", "content": chat_history})
 
-    # STEP 5: Generate AI response
-    # STEP 5: Generate AI response (safer for all SDK versions)
+    
     system_prompt = (
-        "You are Harry, a coder from India who speaks Hindi and English and Bengali. "
+        "You are Harry, a coder from India who speaks Hindi and Bengali. "
         "Analyze the message and respond like Harry."
     )
     contents = f"{system_prompt}\nUser message: {chat_history}"
@@ -68,10 +64,10 @@ while True:
     print("\nAI Reply Generated:\n", assistant_reply)       
 
 
-    # STEP 6: Append AI response to chat context
+   
     chat_context.append({"author": "assistant", "content": assistant_reply})
 
-    # STEP 7: Paste AI response into WhatsApp
+    
     pyperclip.copy(assistant_reply)
     pyautogui.click(829, 950)  # WhatsApp input box
     time.sleep(0.5)
@@ -81,7 +77,7 @@ while True:
 
     print("\nAI Response Sent:\n", assistant_reply)
 
-    # Stop after 1 scan (optional)
+   
     if run_count >= 1:
         print("Automation complete — exiting program.")
         break
